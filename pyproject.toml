@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "observers/version.py"
+
+[project]
+name = "observers"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["fastmcp"]
+
+[project.optional-dependencies]
+gmail = [
+    "google-api-python-client",
+    "google-auth-oauthlib",
+    "google-auth-httplib2",
+]
+all = ["observers[gmail]"]
+
+[tool.ruff]
+line-length = 120
+lint.extend-select = ["Q", "RUF100", "C90", "UP", "I"]
+lint.ignore = ["E721"]
+lint.flake8-quotes = { inline-quotes = "single", multiline-quotes = "double" }
+lint.mccabe = { max-complexity = 14 }
+lint.pydocstyle = { convention = "google" }
+format.quote-style = "single"
+target-version = "py312"
