@@ -18,8 +18,7 @@ async def get_github_notifications(ctx: Context) -> list[dict]:
     returns a list of notification events from configured repositories
     """
     try:
-        events = check_notifications()
-        return [event.model_dump() for event in events]
+        return [event.model_dump() for event in check_notifications()]
     except ValueError as e:
         # handle configuration errors
         ctx.error(str(e))
@@ -36,7 +35,3 @@ def analyze_notifications() -> str:
 1. group by repository and type
 2. identify urgent items needing attention
 3. suggest next actions"""
-
-
-if __name__ == '__main__':
-    mcp.run()
