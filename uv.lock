@@ -108,7 +108,7 @@ wheels = [
 [[package]]
 name = "fastmcp"
 version = "0.3.3"
-source = { registry = "https://pypi.org/simple" }
+source = { git = "https://github.com/jlowin/fastmcp.git#03cc8b104f2420867d6932520dfad7a8c04bf240" }
 dependencies = [
     { name = "httpx" },
     { name = "mcp" },
@@ -116,10 +116,6 @@ dependencies = [
     { name = "pydantic-settings" },
     { name = "python-dotenv" },
     { name = "typer" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/c8/64/b158acbb8b72a0b1a67837a54660bc230cd43a91d989ff13e1e9c4221be4/fastmcp-0.3.3.tar.gz", hash = "sha256:263360d3865b6dc8dbe70b2221c0ddcbc969c9708de53f26b9ac8d6ae61a3c7d", size = 774887 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/43/15/d8f409de53602194770b2b00bf00ba1d6d25aed0aba25e19d5093c754856/fastmcp-0.3.3-py3-none-any.whl", hash = "sha256:2b19f0e98b61f430a4c97901b0b53e2feb680320c36b301fba09f0fe8c2b892e", size = 34553 },
 ]
 
 [[package]]
@@ -265,6 +261,18 @@ wheels = [
 ]
 
 [[package]]
+name = "humanlayer"
+version = "0.6.3rc1"
+source = { git = "https://github.com/zzstoatzz/humanlayer.git?rev=relax-deps#0d6bc88bb9b1e1c30b0337d69e6a8154b09ee178" }
+dependencies = [
+    { name = "click" },
+    { name = "pydantic" },
+    { name = "python-dotenv" },
+    { name = "python-slugify" },
+    { name = "requests" },
+]
+
+[[package]]
 name = "idna"
 version = "3.10"
 source = { registry = "https://pypi.org/simple" }
@@ -326,6 +334,8 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "fastmcp" },
+    { name = "humanlayer" },
+    { name = "pydantic" },
 ]
 
 [package.optional-dependencies]
@@ -333,20 +343,27 @@ all = [
     { name = "google-api-python-client" },
     { name = "google-auth-httplib2" },
     { name = "google-auth-oauthlib" },
+    { name = "slack-sdk" },
 ]
 gmail = [
     { name = "google-api-python-client" },
     { name = "google-auth-httplib2" },
     { name = "google-auth-oauthlib" },
 ]
+slack = [
+    { name = "slack-sdk" },
+]
 
 [package.metadata]
 requires-dist = [
-    { name = "fastmcp" },
+    { name = "fastmcp", git = "https://github.com/jlowin/fastmcp.git" },
     { name = "google-api-python-client", marker = "extra == 'gmail'" },
     { name = "google-auth-httplib2", marker = "extra == 'gmail'" },
     { name = "google-auth-oauthlib", marker = "extra == 'gmail'" },
-    { name = "observers", extras = ["gmail"], marker = "extra == 'all'" },
+    { name = "humanlayer", git = "https://github.com/zzstoatzz/humanlayer.git?rev=relax-deps" },
+    { name = "observers", extras = ["gmail", "slack"], marker = "extra == 'all'" },
+    { name = "pydantic", specifier = ">=2.10.0" },
+    { name = "slack-sdk", marker = "extra == 'slack'" },
 ]
 
 [[package]]
@@ -490,6 +507,18 @@ wheels = [
 ]
 
 [[package]]
+name = "python-slugify"
+version = "8.0.4"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "text-unidecode" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/87/c7/5e1547c44e31da50a460df93af11a535ace568ef89d7a811069ead340c4a/python-slugify-8.0.4.tar.gz", hash = "sha256:59202371d1d05b54a9e7720c5e038f928f45daaffe41dd10822f3907b937c856", size = 10921 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a4/62/02da182e544a51a5c3ccf4b03ab79df279f9c60c5e82d5e8bec7ca26ac11/python_slugify-8.0.4-py2.py3-none-any.whl", hash = "sha256:276540b79961052b66b7d116620b36518847f52d5fd9e3a70164fc8c50faa6b8", size = 10051 },
+]
+
+[[package]]
 name = "requests"
 version = "2.32.3"
 source = { registry = "https://pypi.org/simple" }
@@ -552,6 +581,15 @@ wheels = [
 ]
 
 [[package]]
+name = "slack-sdk"
+version = "3.33.4"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/e6/ee/f1bd8fde0097d74ddc08d186726da17a1f041021ed6f422a8ac94ffc8e84/slack_sdk-3.33.4.tar.gz", hash = "sha256:5e109847f6b6a22d227609226ba4ed936109dc00675bddeb7e0bee502d3ee7e0", size = 233093 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8a/7d/23074983ffd0d2d01163b74c621d7ffa3ea21e938b6d6443659adb63bb73/slack_sdk-3.33.4-py2.py3-none-any.whl", hash = "sha256:9f30cb3c9c07b441c49d53fc27f9f1837ad1592a7e9d4ca431f53cdad8826cc6", size = 292095 },
+]
+
+[[package]]
 name = "sniffio"
 version = "1.3.1"
 source = { registry = "https://pypi.org/simple" }
@@ -584,6 +622,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/1a/4c/9b5764bd22eec91c4039ef4c55334e9187085da2d8a2df7bd570869aae18/starlette-0.41.3.tar.gz", hash = "sha256:0e4ab3d16522a255be6b28260b938eae2482f98ce5cc934cb08dce8dc3ba5835", size = 2574159 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/96/00/2b325970b3060c7cecebab6d295afe763365822b1306a12eeab198f74323/starlette-0.41.3-py3-none-any.whl", hash = "sha256:44cedb2b7c77a9de33a8b74b2b90e9f50d11fcf25d8270ea525ad71a25374ff7", size = 73225 },
+]
+
+[[package]]
+name = "text-unidecode"
+version = "1.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/ab/e2/e9a00f0ccb71718418230718b3d900e71a5d16e701a3dae079a21e9cd8f8/text-unidecode-1.3.tar.gz", hash = "sha256:bad6603bb14d279193107714b288be206cac565dfa49aa5b105294dd5c4aab93", size = 76885 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a6/a5/c0b6468d3824fe3fde30dbb5e1f687b291608f9473681bbf7dabbf5a87d7/text_unidecode-1.3-py2.py3-none-any.whl", hash = "sha256:1311f10e8b895935241623731c2ba64f4c455287888b18189350b67134a822e8", size = 78154 },
 ]
 
 [[package]]
